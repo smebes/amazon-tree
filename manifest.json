@@ -1,0 +1,25 @@
+
+{
+  "manifest_version": 3,
+  "name": "Amazon Kategori Listesi",
+  "version": "1.0",
+  "description": "Amazon 'Best Sellers' sayfasındaki alt kategorileri listeler.",
+  "permissions": ["activeTab"],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.amazon.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "128": "icon.png"
+  }
+}
