@@ -41,13 +41,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log("Kategori linkleri bulunamadı.");
                 }
                 // Sayfadaki tüm kategori linklerini seç
-                // const categoryLinks = document.querySelectorAll('._p13n-zg-nav-tree-all_style_zg-browse-item__1rdKf._p13n-zg-nav-tree-all_style_zg-browse-height-large__1z5B8 a');
 
                 // Kategori isimlerini bir diziye topla
-                let categories = Array.from(categoryLinks).map(link => link.innerText);
-
+                // let categories = Array.from(categoryLinks).map(link => link.innerText);
+                // let categories = Array.from(categoryLinks).map(link => `${link.innerText}: https://www.amazon.com${link.getAttribute('href')}`);
+                let categoryCodes = Array.from(categoryLinks).map(link => {
+                    const href = link.getAttribute('href');
+                    const match = /\/books\/(\d+)/.exec(href);
+                    return match ? `${link.innerText}: ${match[1]}` : `${link.innerText}: Kod bulunamadı`;
+                });
+                
+                // Kategori isimleri ve sayısal kodları konsola yazdır
+                console.log(categoryCodes);
                 // Dizi elemanlarını bir metin haline getir (her bir kategori adını yeni bir satıra yerleştir)
-                let categoriesText = categories.join('\n');
+                let categoriesText = categoryCodes.join('\n');
 
                 // Metni bir Blob nesnesine dönüştür
                 let blob = new Blob([categoriesText], { type: 'text/plain;charset=utf-8' });

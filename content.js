@@ -7,20 +7,15 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-// function downloadCategories() {
-//     const categoryElements = document.querySelectorAll('._p13n-zg-nav-tree-all_style_zg-browse-item__1rdKf _p13n-zg-nav-tree-all_style_zg-browse-height-large__1z5B8 a');
-//     const categoryDetails = Array.from(categoryElements).map(el => `${el.innerText}: ${el.href}`).join('\n');
-
-//     const blob = new Blob([categoryDetails], {type: 'text/plain;charset=utf-8'});
-//     const url = URL.createObjectURL(blob);
-//     const a = document.createElement('a');
-//     a.href = url;
-//     a.download = 'kategori.txt';
-//     document.body.appendChild(a);
-//     a.click();
-//     document.body.removeChild(a);
-//     URL.revokeObjectURL(url);
-// }
+// content.js - Örnek bir alt kategori linkine tıklama işlemi simülasyonu
+chrome.runtime.sendMessage({
+    contentScriptQuery: "fetchCategoryDetails",
+    url: "/Best-Sellers-Books-Architecture/zgbs/books/173508/ref=zg_bs_nav_books_2_1"
+}, response => {
+    console.log(response.data);
+    // Burada, 'response.data' içerisinde, istenilen sayfanın HTML içeriği bulunur.
+    // Bu HTML içeriğini parse edip istediğiniz verileri çekebilirsiniz.
+});
 
 function downloadCategories() {
     // Verilen HTML yapısına göre alt kategorileri seçmek için doğru CSS seçicisini kullanın.
@@ -52,8 +47,3 @@ function downloadCategories() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
-
-
-// // Sayfa tamamen yüklendiğinde kategori indirme işlevini otomatik olarak çalıştır.
-// window.onload = downloadCategories;
-
