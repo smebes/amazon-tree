@@ -4,8 +4,13 @@
   "name": "Amazon Kategori Listesi",
   "version": "1.0",
   "description": "Amazon 'Best Sellers' sayfasındaki alt kategorileri listeler.",
-  "permissions": ["activeTab"],
-  
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting",
+    "downloads",
+    "storage"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon.png"
@@ -15,7 +20,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.amazon.com/*"],
+      "matches": ["https://www.amazon.com/best-sellers-books-Amazon/zgbs/books/*","https://www.amazon.com.tr/*"],
       "js": ["content.js"]
     }
   ],
